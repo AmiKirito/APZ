@@ -84,7 +84,7 @@ namespace Presentation
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
-          //  FillRoles.Initialize(context, userManager, roleManager).Wait();
+           FillRoles.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }

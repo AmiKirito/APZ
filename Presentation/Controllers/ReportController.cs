@@ -94,7 +94,7 @@ namespace PollutionReports.Controllers
 
                 return RedirectToAction("Details", "Report", new { id = report.Id });
             }
-            return View();
+            return View(model);
         }
         [Authorize(Roles = "Admin, Company, CommonUser")]
         public IActionResult Details(int id)

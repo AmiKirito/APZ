@@ -10,11 +10,11 @@ namespace PollutionReports.ViewModels
 {
     public class CreateReportViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "The report title is required")]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The report company name is required")]
         public string CompanyName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The report Document must be attached")]
         public IFormFile Document { get; set; }
         public DateTime SubmissionDate { get; set; }
         public List<Company> Companies { get; set; }

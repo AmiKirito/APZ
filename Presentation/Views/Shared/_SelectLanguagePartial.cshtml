@@ -15,13 +15,14 @@
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
 }
 
-<div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
-    <form id="selectLanguage" asp-controller="Home"
-          asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
-          method="post" class="form-horizontal" role="form">
-        <label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language"]</label> <select name="culture"
-                                                                                                               onchange="this.form.submit();"
-                                                                                                               asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
-        </select>
+<div class="language-switch" title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+    <form asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" method="post" role="form">
+        <div class="language-lable">
+            <label asp-for="@requestCulture.RequestCulture.UICulture.Name">@Localizer["Language"]</label>
+        </div>
+        <div class="language-select">
+            <select class="custom-select" name="culture" onchange="this.form.submit();" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
+            </select>
+        </div>
     </form>
 </div>

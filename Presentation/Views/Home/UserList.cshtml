@@ -13,16 +13,21 @@
     </div>
 }
 <h1>@Localizer["UserList"]</h1>
-
-@foreach (var user in Model.OrderBy(u => u.Username))
-{
-    <br />
-    <h3>@Localizer["Username"]: @user.Username</h3>
-    <h3>@Localizer["Roles"]:
+<div class="user-list">
+    @foreach (var user in Model.OrderBy(u => u.Username))
+    {
+    <div class="user">
+        <h3>@Localizer["Username"]: @user.Username</h3>
+        <h3>
+            @Localizer["Roles"]:
         @foreach (var role in user.Roles)
         {
             @role
         }
-    </h3>
-    <a asp-action="RemoveUser" asp-route-userId="@user.Id" asp-controller="Home" class="btn btn-danger">@Localizer["DeleteUser"]</a>
-}
+        </h3>
+        <div class="remove-user-btn">
+            <a asp-action="RemoveUser" asp-route-userId="@user.Id" asp-controller="Home" class="btn btn-danger">@Localizer["DeleteUser"]</a>
+        </div>
+    </div>
+    }
+</div>

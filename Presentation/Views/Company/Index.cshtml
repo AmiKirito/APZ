@@ -6,45 +6,58 @@
 @{
     ViewBag.Title = Localizer["Title"];
 }
-
-@if (signInManager.IsSignedIn(User) && User.Claims.Any(c => c.Value == "Company"))
-{
-    foreach (var company in Model.Where(c => c.Owner.UserName == User.Identity.Name))
-    {
-        <br />
-        <h2>@Localizer["ComTitle"]: @company.Title</h2>
-        <h4>@Localizer["Owner"]: @company.Owner.UserName</h4>
-        <h5>@Localizer["Country"]: @company.Country</h5>
-        <h5>@Localizer["Town"]: @company.Town</h5>
-        <a asp-action="Details" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-primary">@Localizer["Details"]</a>
-        <a asp-action="Add" asp-controller="Report" class="btn btn-primary">@Localizer["AddReport"]</a>
-    }
-}
-else if (signInManager.IsSignedIn(User) && User.Claims.Any(c => c.Value == "Admin"))
-{
-    foreach (var company in Model.OrderBy(c => c.Title))
-    {
-        <br />
-        <h2>@Localizer["ComTitle"]: @company.Title</h2>
-        <h4>@Localizer["Owner"]: @company.Owner.UserName</h4>
-        <h5>@Localizer["Country"]: @company.Country</h5>
-        <h5>@Localizer["Town"]: @company.Town</h5>
-        <a asp-action="Details" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-primary">@Localizer["Details"]</a>
-        <a asp-action="Remove" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-danger">@Localizer["DelComp"]</a>
-        <a asp-action="Add" asp-controller="Report" class="btn btn-primary">@Localizer["AddReport"]</a>
-        <a asp-action="Add" asp-route-id="@company.Id" asp-controller="Survey" class="btn btn-primary">@Localizer["AddSur"]</a>
-    }
-}
-else
-{
-    foreach (var company in Model.OrderBy(c => c.Title))
-    {
-        <br />
-        <h2>@Localizer["ComTitle"]: @company.Title</h2>
-        <h5>@Localizer["Country"]: @company.Country</h5>
-        <h5>@Localizer["Town"]: @company.Town</h5>
-        <a asp-action="Details" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-primary">@Localizer["Details"]</a>
-        <a asp-action="Add" asp-route-id="@company.Id" asp-controller="Survey" class="btn btn-primary">@Localizer["AddSur"]</a>
-    }
-}
-
+    <div class="company-list">
+        @if (signInManager.IsSignedIn(User) && User.Claims.Any(c => c.Value == "Company"))
+        {
+            foreach (var company in Model.Where(c => c.Owner.UserName == User.Identity.Name))
+            {
+                <div class="company">
+                    <h2>@company.Title</h2>
+                    <div class="company-btn">
+                        <a asp-action="Details" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-primary">@Localizer["Details"]</a>
+                    </div>
+                    <div class="company-btn">
+                        <a asp-action="Add" asp-controller="Report" class="btn btn-primary">@Localizer["AddReport"]</a>
+                    </div>
+                </div>
+            }
+        }
+        else if (signInManager.IsSignedIn(User) && User.Claims.Any(c => c.Value == "Admin"))
+        {
+            foreach (var company in Model.OrderBy(c => c.Title))
+            {
+                <div class="company">
+                    <h2>@company.Title</h2>
+                    <div class="company-btn-group">
+                        <div class="company-btn">
+                            <a asp-action="Details" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-primary w3">@Localizer["Details"]</a>
+                        </div>
+                        <div class="company-btn">
+                            <a asp-action="Remove" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-danger w3">@Localizer["DelComp"]</a>
+                        </div>
+                        <div class="company-btn">
+                            <a asp-action="Add" asp-controller="Report" class="btn btn-primary w3">@Localizer["AddReport"]</a>
+                        </div>
+                        <div class="company-btn">
+                            <a asp-action="Add" asp-route-id="@company.Id" asp-controller="Survey" class="btn btn-primary w3">@Localizer["AddSur"]</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            foreach (var company in Model.OrderBy(c => c.Title))
+            {
+                <div class="company">
+                    <h2>@company.Title</h2>
+                    <div class="company-btn">
+                        <a asp-action="Details" asp-route-id="@company.Id" asp-controller="Company" class="btn btn-primary">@Localizer["Details"]</a>
+                    </div>
+                    <div class="company-btn">
+                        <a asp-action="Add" asp-route-id="@company.Id" asp-controller="Survey" class="btn btn-primary">@Localizer["AddSur"]</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>

@@ -83,7 +83,8 @@ namespace PollutionReports.Controllers
 
                 return RedirectToAction("Details", "Survey", new { id = survey.Id });
             }
-            return View();
+
+            return View(model);
         }
     }
 }

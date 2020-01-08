@@ -51,7 +51,7 @@ namespace PollutionReports.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CompanyCreateViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !(dbContext.Companies.Any(c => c.Title == model.Title)))
             {
                 var user = await userManager.FindByNameAsync(model.AssignedUser);
 

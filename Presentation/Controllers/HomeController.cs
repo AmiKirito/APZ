@@ -69,7 +69,10 @@ namespace PollutionReports.Controllers
                 string description = $"This is the {role} role";
 
                 IdentityResult result = new IdentityResult();
-
+                if(model.Role == "Company")
+                {
+                    user.PhoneNumberConfirmed = true;
+                }
                 result = await userManager.CreateAsync(user);
 
                 if (result.Succeeded)

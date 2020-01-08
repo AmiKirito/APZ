@@ -13,27 +13,35 @@ namespace PollutionReports.Models
         {
             context.Database.EnsureCreated();
 
-            string role = "Company";
+            //string role = "Admin";
+            string role2 = "CommonUser";
+            string role3 = "Company";
 
-            //string description = "This is the company role";
+            string description2 = "This is the common user role";
+            string description3 = "This is the company role";
+            //string description = "This is the admin role";
 
-            string password = "Emilia0Tan3";
+            //string password = "Emilia0Tan3";
 
-            //if(await roleManager.FindByNameAsync(role) == null)
+            //if (await roleManager.FindByNameAsync(role) == null)
             //{
             //    await roleManager.CreateAsync(new ApplicationRole(role, description, DateTime.Now));
             //}
-                var user = new User
-                {
-                    UserName = "Apple",
-                    Email = "apple@gmail.com",
-                };
-                var result = await userManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, role);
-                }
+
+            //var user = new User
+            //    {
+            //        UserName = "AmiKirito",
+            //        Email = "romankrol2000@gmail.com",
+            //    };
+            //    var result = await userManager.CreateAsync(user);
+            //    if (result.Succeeded)
+            //    {
+            //        await userManager.AddPasswordAsync(user, password);
+            //        await userManager.AddToRoleAsync(user, role);
+            //    }
+
+            await roleManager.CreateAsync(new ApplicationRole(role2, description2, DateTime.Now));
+            await roleManager.CreateAsync(new ApplicationRole(role3, description3, DateTime.Now));
         }
     }
 }

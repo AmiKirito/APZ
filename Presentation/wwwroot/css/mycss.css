@@ -1,0 +1,89 @@
+﻿.user-list {
+    position: relative;
+    width: 100%;
+    text-align:center;
+    margin-bottom: 30px;
+}
+.user {
+    position: relative;
+    display: inline-block;
+    max-width: 33%;
+    min-width: 300px;
+    border: 2px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    margin: 5px;
+}
+.remove-user-btn{
+    position:relative;
+    margin-bottom: 5px;
+}
+.company-list{
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.company {
+    position: relative;
+    display: inline-block;
+    max-width: 33%;
+    min-width: 300px;
+    border: 2px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    margin: 5px;
+}
+.company-btn{
+    position:relative;
+    display:inline-block;
+    margin:3px;
+}
+.company-btn-group{
+    position:relative;
+    margin-bottom: 3px;
+}
+.w3 {
+    width: 170px;
+}
+.menu-item{
+    width:150px;
+    position:relative;
+    left: 10px;
+    margin: 3px;   
+    padding: 3px;
+}
+.dropdown-menu{
+    width: 220px;
+}
+.navbar-toggler{
+    position: relative;
+    right: 5px;
+}
+.language-switch{
+    position:relative;
+    width: 200px;
+}
+.language-lable{
+    position: relative;
+    display: inline-block;
+    margin: 3px;
+}
+.language-select{
+    position: relative;
+    display: inline-block;
+    margin: 3px;
+}
+.footer-content{
+    position: relative;
+    width: 750px;
+    margin: 10px;
+}
+.footer-copyright {
+    position: relative;
+    padding: 5px;
+}
+.footer-lang {
+    position: relative;
+    padding: 5px;
+}
+.dropdown-item{
+    width: 190px;
+}
