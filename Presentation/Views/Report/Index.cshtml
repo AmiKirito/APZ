@@ -1,0 +1,58 @@
+﻿@model SearchReportViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Title"];
+
+}
+<form method="get">
+    <div class="form-inline form-group">
+        <label class="m-1 h4" asp-for="startDate">@Localizer["start"]: </label>
+        <input type="date" value="@System.DateTime.Today.ToShortDateString()"
+               min="2013-01-01" max="@System.DateTime.Today.ToShortDateString()"
+               asp-for="startDate">
+        <label class="m-1 h4" asp-for="endDate">@Localizer["end"]: </label>
+        <input type="date" value="@System.DateTime.Today.ToShortDateString()"
+               min="2013-01-01" max="@System.DateTime.Today.ToShortDateString()"
+               asp-for="endDate">
+        <input type="submit" value="@Localizer["Search"]" class="btn btn-primary m-2" />
+    </div>
+</form>
+
+@if (User.Claims.Any(c => c.Value == "Company"))
+{
+    @foreach (var report in Model.reports.OrderBy(r => r.Company.Title).ThenByDescending(r => r.SubmissionDate))
+    {
+        <h1>@Localizer["RepTitle"]: @report.Title</h1>
+        <h1>@Localizer["CompTitle"]: @report.Company.Title</h1>
+        <h1>@Localizer["SubDate"]: @report.SubmissionDate.ToShortDateString()</h1>
+        <a asp-action="Details" asp-controller="Report" asp-route-id="@report.Id" class="btn btn-primary">@Localizer["Details"]</a>
+        <a asp-action="Delete" asp-controller="Report" asp-route-id="@report.Id" class="btn btn-danger">@Localizer["Delete"]</a>
+        <br />
+    }
+}
+else if (User.Claims.Any(c => c.Value == "Admin"))
+{
+    @foreach (var report in Model.reports.OrderBy(r => r.Company.Title).ThenByDescending(r => r.SubmissionDate))
+    {
+        <h1>@Localizer["RepTitle"]: @report.Title</h1>
+        <h1>@Localizer["CompTitle"]: @report.Company.Title</h1>
+        <h1>@Localizer["SubDate"]: @report.SubmissionDate.ToShortDateString()</h1>
+        <a asp-action="Details" asp-controller="Report" asp-route-id="@report.Id" class="btn btn-primary">@Localizer["Details"]</a>
+        <a asp-action="Delete" asp-controller="Report" asp-route-id="@report.Id" class="btn btn-danger">@Localizer["Delete"]</a>
+        <br />
+    }
+}
+else
+{
+    @foreach (var report in Model.reports.OrderBy(r => r.Company.Title).ThenByDescending(r => r.SubmissionDate))
+    {
+        <h1>@Localizer["RepTitle"]: @report.Title</h1>
+        <h1>@Localizer["CompTitle"]: @report.Company.Title</h1>
+        <h1>@Localizer["SubDate"]: @report.SubmissionDate.ToShortDateString()</h1>
+        <a asp-action="Details" asp-controller="Report" asp-route-id="@report.Id" class="btn btn-primary">@Localizer["Details"]</a>
+        <br />
+    }
+}
+
+

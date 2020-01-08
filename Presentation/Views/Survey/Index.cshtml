@@ -1,0 +1,33 @@
+﻿@model (List<Survey> surveys, string CompanyName)
+@inject SignInManager<User> signInManager
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Title"] + Model.CompanyName;
+}
+
+@if (Model.surveys.Count == 0)
+{
+    <h1>@Localizer["NoSur"]</h1>
+    <a asp-action="Index" asp-controller="Company" class="btn btn-primary">@Localizer["Back"]</a>
+}
+else
+{
+    @if (User.Claims.Any(c => c.Value == "CommonUser"))
+    {
+        @foreach (var survey in Model.surveys.Where(s => s.Username == User.Identity.Name).OrderBy(s => s.Company.Title))
+        {
+            <h1>@Localizer["User"]: @survey.Username</h1>
+            <a asp-action="Details" asp-controller="Survey" asp-route-id="@survey.Id" class="btn btn-primary">@Localizer["Details"]</a>
+        }
+    }
+    else
+    {
+        @foreach (var survey in Model.surveys.OrderBy(s => s.Company.Title))
+        {
+            <h1>@Localizer["User"]: @survey.Username</h1>
+            <a asp-action="Details" asp-controller="Survey" asp-route-id="@survey.Id" class="btn btn-primary">@Localizer["Details"]</a>
+        }
+    }
+}
+

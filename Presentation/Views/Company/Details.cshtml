@@ -1,0 +1,34 @@
+﻿@model Company
+@inject SignInManager<User> signInManager
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Title"];
+}
+
+<h2>@Localizer["CompTitle"]: @Model.Title</h2>
+@if (User.Claims.Any(c => c.Value == "Admin") || User.Claims.Any(c => c.Value == "Company"))
+{
+<h4>@Localizer["Owner"]: @Model.Owner.UserName</h4>
+}
+<h5>@Localizer["Country"]: @Model.Country</h5>
+<h5>@Localizer["Town"]: @Model.Town</h5>
+@if (User.Claims.Any(c => c.Value == "Admin") || User.Claims.Any(c => c.Value == "Company"))
+{
+    <a asp-action="Remove" asp-route-id="@Model.Id" asp-controller="Company" class="btn btn-danger">@Localizer["DelComp"]</a>
+    <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Report" class="btn btn-primary">@Localizer["CheckRep"]</a>
+    <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Survey" class="btn btn-primary">@Localizer["CheckSur"]</a>
+    <a asp-action="Index" asp-controller="Company" class="btn btn-primary">@Localizer["Back"]</a>
+}
+else if (User.Claims.Any(c => c.Value == "Company"))
+{
+    <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Report" class="btn btn-primary">@Localizer["CheckRep"]</a>
+    <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Survey" class="btn btn-primary">@Localizer["CheckSur"]</a>
+    <a asp-action="Index" asp-controller="Company" class="btn btn-primary">@Localizer["Back"]</a>
+}
+else
+{
+    <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Survey" class="btn btn-primary">@Localizer["MySurveys"]</a>
+    <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Report" class="btn btn-primary">@Localizer["CheckRep"]</a>
+    <a asp-action="Index" asp-controller="Company" class="btn btn-primary">@Localizer["Back"]</a>
+}

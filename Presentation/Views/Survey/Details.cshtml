@@ -1,0 +1,12 @@
+﻿@model Survey
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Title"];
+}
+
+<h1>@Localizer["From"]: @Model.Username</h1>
+<h1>@Localizer["For"]: @Model.Company.Title</h1>
+<h3>@Localizer["Survey"]: @Model.Content</h3>
+
+<a asp-action="Index" asp-controller="Company" class="btn btn-primary">@Localizer["Back"]</a>

@@ -1,0 +1,28 @@
+﻿@model Collection<UserViewModel>
+@inject UserManager<User> userManager
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Title"];
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <h1>ViewBag.Error</h1>
+    </div>
+}
+<h1>@Localizer["UserList"]</h1>
+
+@foreach (var user in Model.OrderBy(u => u.Username))
+{
+    <br />
+    <h3>@Localizer["Username"]: @user.Username</h3>
+    <h3>@Localizer["Roles"]:
+        @foreach (var role in user.Roles)
+        {
+            @role
+        }
+    </h3>
+    <a asp-action="RemoveUser" asp-route-userId="@user.Id" asp-controller="Home" class="btn btn-danger">@Localizer["DeleteUser"]</a>
+}

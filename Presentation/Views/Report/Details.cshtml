@@ -1,0 +1,12 @@
+﻿@model Report
+@inject SignInManager<User> signInManager
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = Localizer["Title"];
+}
+
+<h1>@Localizer["RepTitle"]: @Model.Title</h1>
+<h1>@Localizer["CompTitle"]: @Model.Company.Title</h1>
+<h1>@Localizer["SubmDate"]: @Model.SubmissionDate.ToShortDateString()</h1>
+<a asp-action="GetFile" asp-controller="Report" asp-route-id="@Model.Id" class="btn btn-primary">@Localizer["Download"]</a>
